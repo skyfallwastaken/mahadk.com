@@ -13,6 +13,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { unified } from "@astrojs/markdown-remark";
 import { remarkAlert } from "remark-github-blockquote-alert";
 
+import earlyHints from "./integrations/early-hints.mjs";
 import { SITE_DESCRIPTION, SITE_TITLE } from "./src/constants";
 
 // https://astro.build/config
@@ -25,6 +26,7 @@ export default defineConfig({
       themes: ["catppuccin-macchiato", "catppuccin-latte"],
     }),
     mdx(),
+    earlyHints(),
     sitemap(),
     webmanifest({
       name: SITE_TITLE,
