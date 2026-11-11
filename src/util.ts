@@ -32,7 +32,12 @@ export async function getWebring(
   url: URL,
   webringUrl: URL = new URL("https://webring.hackclub.com/members.json"),
 ) {
-  const response = await fetch(webringUrl);
+  // The members list rarely changes and its origin sends max-age=0, so cache it
+  // in Cloudflare's edge cache for 5 minutes instead of hitting it every request
+  const init = {
+    cf: { cacheTtl: 300, cacheEverything: true },
+  } as RequestInit;
+  const response = await fetch(webringUrl, init);
   const members = (await response.json()) as Member[];
 
   const siteIndex = members.findIndex(
