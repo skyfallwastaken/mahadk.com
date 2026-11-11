@@ -1,5 +1,3 @@
 {
-  "entry": ["cloudflare.config.ts"],
-  "ignore": ["sitemap-ext:*"],
-  "ignoreDependencies": ["sitemap-ext"]
+  "entry": ["cloudflare.config.ts"]
 }
