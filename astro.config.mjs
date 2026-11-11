@@ -1,15 +1,16 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, sessionDrivers } from "astro/config";
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import webmanifest from "astro-webmanifest";
 
-import vercel from "@astrojs/vercel";
+import cloudflare from "@astrojs/cloudflare";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import { unified } from "@astrojs/markdown-remark";
 import { remarkAlert } from "remark-github-blockquote-alert";
 
 import { SITE_DESCRIPTION, SITE_TITLE } from "./src/constants";
@@ -17,6 +18,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "./src/constants";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mahadk.com",
+  // Astro 7 defaults to "jsx", which strips whitespace between inline elements
+  compressHTML: true,
   integrations: [
     expressiveCode({
       themes: ["catppuccin-macchiato", "catppuccin-latte"],
@@ -43,7 +46,7 @@ export default defineConfig({
         dark: "catppuccin-macchiato",
       },
     },
-    remarkPlugins: [remarkAlert],
+    processor: unified({ remarkPlugins: [remarkAlert] }),
   },
 
   vite: {
@@ -86,5 +89,11 @@ export default defineConfig({
     },
   },
 
-  adapter: vercel(),
+  // No sessions are used, so skip provisioning a KV namespace for them
+  session: { driver: sessionDrivers.lruCache() },
+
+  adapter: cloudflare({
+    prerenderEnvironment: "node",
+    imageService: "compile",
+  }),
 });

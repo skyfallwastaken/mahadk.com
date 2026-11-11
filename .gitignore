@@ -24,3 +24,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Cloudflare
+.wrangler/
+.cloudflare/
+.dev.vars*
+!.dev.vars.example

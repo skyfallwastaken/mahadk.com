@@ -11,20 +11,22 @@
     "astro": "astro",
     "knip": "knip-bun",
     "format": "biome format --write",
-    "check": "biome check && bun knip && astro check"
+    "check": "biome check && bun knip && astro check",
+    "deploy": "cf deploy"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
-    "@astrojs/mdx": "6.0.1",
-    "@astrojs/rss": "4.0.18",
-    "@astrojs/sitemap": "3.7.0",
-    "@astrojs/vercel": "10.0.8",
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/cloudflare": "15.0.0-beta.5",
+    "@astrojs/markdown-remark": "^7.3.8",
+    "@astrojs/mdx": "^8.1.5",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/ibm-plex-sans": "^5.2.8",
     "@fontsource/fira-code": "^5.2.7",
     "@skyfall-powered/simple-icons-astro": "^12.4.2",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "6.4.3",
-    "astro-expressive-code": "^0.41.7",
+    "astro": "^7.4.11",
+    "astro-expressive-code": "^0.44.3",
     "astro-webmanifest": "^1.0.0",
     "date-fns": "^4.4.0",
     "lanyard-wrapper": "2.0.1",
@@ -40,11 +42,12 @@
     "@biomejs/biome": "^1.9.4",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22.19.19",
+    "cf": "1.0.0-beta.30",
     "knip": "^5.88.1",
     "typescript": "^5.9.3"
   },
   "overrides": {
     "sharp": "0.34.4"
   },
-  "trustedDependencies": ["@sentry/cli", "esbuild", "sharp"]
+  "trustedDependencies": ["@sentry/cli", "esbuild", "sharp", "workerd"]
 }
